@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>SYNTRO CORE | Auditoría Geoespacial Dual</title>
+    <title>SYNTRO CORE | Auditoría Geoespacial</title>
     <link rel="stylesheet" href="leaflet.css" />
     <style>
         :root { 
@@ -13,54 +13,33 @@
             --accent: #e67e22;
         }
         body { font-family: 'Segoe UI', sans-serif; background: var(--bg); padding: 10px; color: #1a252f; margin: 0; }
-        
         .container { max-width: 1200px; margin: auto; background: var(--bg); padding: 15px; border-radius: 20px; box-shadow: var(--neu-out); }
         
-        /* HEADER RESPONSIVO */
+        /* Header Responsivo */
         .header { 
-            display: flex; 
-            flex-wrap: wrap;
-            justify-content: space-between; 
-            align-items: center; 
-            gap: 15px;
-            margin-bottom: 15px; 
-            padding: 15px;
-            border-radius: 20px;
-            background: var(--bg);
-            box-shadow: var(--neu-out);
+            display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; 
+            gap: 15px; margin-bottom: 15px; padding: 15px; border-radius: 20px;
+            background: var(--bg); box-shadow: var(--neu-out);
         }
         .logo-box { display: flex; align-items: center; gap: 15px; }
-        .logo-img { height: 50px; width: auto; }
-        .brand-text h1 { margin: 0; font-size: 22px; color: #2c3e50; }
-        .brand-text p { margin: 0; font-size: 10px; color: var(--accent); font-weight: bold; }
+        .logo-img { height: 60px; width: auto; }
+        
+        .brand-text h1 { margin: 0; font-size: 24px; color: #2c3e50; font-weight: 900; }
+        .brand-text p { margin: 0; font-size: 11px; color: var(--accent); font-weight: bold; }
 
-        #map { height: 60vh; width: 100%; border-radius: 15px; box-shadow: var(--neu-in); border: 3px solid #fff; margin-top: 10px; background: #708090; } 
+        #map { height: 55vh; width: 100%; border-radius: 15px; box-shadow: var(--neu-in); border: 3px solid #fff; background: #708090; } 
         
-        /* CONTROLES ADAPTATIVOS */
-        .controls { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 10px; margin-top: 15px; }
-        .field { display: flex; flex-direction: column; gap: 5px; }
+        .controls { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 12px; margin-top: 15px; }
+        input, select, button { padding: 12px; border-radius: 10px; border: none; box-shadow: 3px 3px 6px #b8b9be, -3px -3px 6px #ffffff; background: var(--bg); font-weight: bold; font-size: 14px; }
         
-        input, select, button { 
-            padding: 12px; border-radius: 10px; border: none; 
-            box-shadow: 3px 3px 6px #b8b9be, -3px -3px 6px #ffffff; 
-            background: var(--bg); font-weight: bold; font-size: 14px;
-        }
-        
-        button { cursor: pointer; text-transform: uppercase; transition: 0.2s; }
-        button:active { box-shadow: var(--neu-in); }
+        button { cursor: pointer; text-transform: uppercase; background: #2980b9; color: white; border: 1px solid #fff; }
         .btn-sat { background: #34495e; color: white; }
         .btn-sat.on { background: var(--accent); }
         
         .stats-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin-top: 15px; }
         .stat-card { background: var(--bg); padding: 12px; border-radius: 12px; box-shadow: var(--neu-out); text-align: center; }
-        .stat-card span { font-size: 20px; font-weight: 900; color: #27ae60; display: block; }
-        label { font-size: 9px; font-weight: 800; color: #7f8c8d; text-transform: uppercase; }
-
-        @media (max-width: 600px) {
-            .brand-text h1 { font-size: 18px; }
-            .logo-img { height: 40px; }
-            #map { height: 50vh; }
-        }
+        .stat-card span { font-size: 22px; font-weight: 900; color: #27ae60; display: block; }
+        label { font-size: 10px; font-weight: 800; color: #7f8c8d; text-transform: uppercase; display: block; margin-bottom: 5px; }
     </style>
 </head>
 <body>
@@ -68,32 +47,32 @@
 <div class="container">
     <div class="header">
         <div class="logo-box">
-            <img src="https://juansuarez2011-png.github.io/logo.png" alt="Syntro Logo" class="logo-img">
+            <img src="logo.png" alt="Syntro Logo" class="logo-img">
             <div class="brand-text">
                 <h1>SYNTRO CORE</h1>
                 <p>Auditoría Geoespacial Dual</p>
             </div>
         </div>
-        <button id="toggleSat" class="btn-sat" onclick="toggleMap()">Satelital: OFF</button>
+        <button id="toggleSat" class="btn-sat" onclick="toggleMap()">Satelital</button>
     </div>
 
     <div class="controls">
-        <div class="field">
+        <div style="display:flex; flex-direction:column;">
             <label>Hemisferio</label>
             <select id="hemi">
                 <option value="+proj=utm">Norte (N)</option>
                 <option value="+south +proj=utm">Sur (S)</option>
             </select>
         </div>
-        <div class="field">
+        <div style="display:flex; flex-direction:column;">
             <label>Zona UTM</label>
             <input type="number" id="utmZone" value="19">
         </div>
-        <div class="field">
-            <label>Cargar CSV</label>
+        <div style="display:flex; flex-direction:column;">
+            <label>Importar CSV</label>
             <input type="file" id="csvFile" accept=".csv">
         </div>
-        <button onclick="descargarJSON()" style="background:#2980b9; color:white;">Exportar GIS</button>
+        <button onclick="descargarJSON()">Exportar</button>
     </div>
 
     <div id="map"></div>
@@ -110,7 +89,7 @@
 <script src="turf.min.js"></script>
 
 <script>
-    let map = L.map('map', { attributionControl: false, zoomSnap: 0.5 }).setView([10.5, -71.5], 8);
+    let map = L.map('map', { attributionControl: false }).setView([10.5, -71.5], 8);
     let polygonLayer, geoData, isSat = false;
     const satTile = L.tileLayer('https://mt1.google.com/vt/lyrs=y&x={x}&y={y}&z={z}');
 
@@ -118,11 +97,9 @@
         const btn = document.getElementById('toggleSat');
         if(!isSat) {
             satTile.addTo(map);
-            btn.innerText = "Satelital: ON";
             btn.classList.add('on');
         } else {
             map.removeLayer(satTile);
-            btn.innerText = "Satelital: OFF";
             btn.classList.remove('on');
         }
         isSat = !isSat;
@@ -143,20 +120,16 @@
                         const y = parseFloat(row.norte || row.Norte || row.Y || row.y);
                         return proj4(utmStr, wgs84, [x, y]);
                     });
-
                     if(pts[0][0] !== pts[pts.length-1][0]) pts.push(pts[0]);
                     geoData = turf.polygon([pts]);
-
                     document.getElementById('valArea').innerText = (turf.area(geoData)/10000).toFixed(2);
                     document.getElementById('valPeri').innerText = (turf.length(geoData)).toFixed(2);
-
                     if (polygonLayer) map.removeLayer(polygonLayer);
-                    polygonLayer = L.geoJSON(geoData, {
-                        style: { color: '#ffffff', weight: 3, fillOpacity: 0.4, fillColor: '#e67e22' }
+                    polygonLayer = L.geoJSON(geoData, { 
+                        style: { color: '#ffffff', weight: 4, fillOpacity: 0.4, fillColor: '#e67e22' } 
                     }).addTo(map);
-                    
-                    map.fitBounds(polygonLayer.getBounds(), {padding: [20, 20]});
-                } catch(err) { alert("Error en el archivo CSV."); }
+                    map.fitBounds(polygonLayer.getBounds(), {padding: [30, 30]});
+                } catch(err) { alert("Error en el CSV."); }
             }
         });
     };
