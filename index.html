@@ -10,59 +10,32 @@
             --bg: #e0e5ec; 
             --neu-out: 9px 8px 16px #bebebe, -8px -8px 16px #ffffff; 
             --neu-in: inset 6px 6px 12px #bebebe, inset -6px -6px 12px #ffffff;
-            --accent: #76c893; /* Verde Syntro para resaltar */
-            /* COLOR SYNTRO SELECCIONADO PARA EL FONDO DEL LOGO */
-            --brand-bg: #184e77; /* Azul Marino Profundo Syntro */
-            --brand-text: #ffffff; /* Texto blanco sobre el fondo oscuro */
+            --accent: #76c893; 
+            --brand-bg: #184e77; 
+            --brand-text: #ffffff; 
         }
         body { font-family: 'Segoe UI', sans-serif; background: var(--bg); padding: 10px; color: #1a252f; margin: 0; }
-        
         .container { max-width: 1200px; margin: auto; background: var(--bg); padding: 15px; border-radius: 20px; box-shadow: var(--neu-out); }
         
-        /* HEADER RESPONSIVO CON FONDO COLOR SYNTRO */
         .header { 
-            display: flex; 
-            flex-wrap: wrap;
-            justify-content: space-between; 
-            align-items: center; 
-            gap: 15px;
-            margin-bottom: 15px; 
-            padding: 20px; /* Más aire */
-            border-radius: 20px;
-            background: var(--brand-bg); /* Fondo de color Syntro */
-            box-shadow: 5px 5px 10px rgba(0,0,0,0.2); /* Sombra más oscura para contraste */
-            color: var(--brand-text); /* Texto blanco por defecto */
+            display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; 
+            gap: 15px; margin-bottom: 15px; padding: 20px; border-radius: 20px;
+            background: var(--brand-bg); box-shadow: 5px 5px 10px rgba(0,0,0,0.2);
+            color: var(--brand-text);
         }
         .logo-box { display: flex; align-items: center; gap: 20px; }
+        .logo-img { height: 65px; width: auto; object-fit: contain; display: block; }
         
-        /* Ajuste de tamaño del logo para que luzca profesional */
-        .logo-img { height: 65px; width: auto; object-fit: contain; }
-        
-        .brand-text h1 { margin: 0; font-size: 28px; letter-spacing: 1px; font-weight: 900; color: var(--brand-text); }
-        .brand-text p { margin: 0; font-size: 12px; font-weight: bold; text-transform: uppercase; color: var(--accent); } /* Verde Syntro para el subtítulo */
+        .brand-text h1 { margin: 0; font-size: 28px; font-weight: 900; }
+        .brand-text p { margin: 0; font-size: 12px; font-weight: bold; text-transform: uppercase; color: var(--accent); }
 
-        #map { height: 60vh; width: 100%; border-radius: 15px; box-shadow: var(--neu-in); border: 3px solid #fff; margin-top: 10px; background: #708090; } 
+        #map { height: 55vh; width: 100%; border-radius: 15px; box-shadow: var(--neu-in); border: 3px solid #fff; background: #708090; } 
         
-        /* CONTROLES ADAPTATIVOS */
         .controls { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 10px; margin-top: 15px; }
-        .field { display: flex; flex-direction: column; gap: 5px; }
-        
-        input, select, button { 
-            padding: 12px; border-radius: 10px; border: none; 
-            box-shadow: 3px 3px 6px #b8b9be, -3px -3px 6px #ffffff; 
-            background: var(--bg); font-weight: bold; font-size: 14px;
-            color: #1a252f;
-        }
-        
-        button { cursor: pointer; text-transform: uppercase; transition: 0.2s; border: 1px solid rgba(255,255,255,0.3); }
-        button:active { box-shadow: var(--neu-in); }
-        
-        /* Botón satélite con estilo Syntro */
-        .btn-sat { background: #34495e; color: white; border: none;}
-        .btn-sat.on { background: var(--accent); color: #1a252f;} /* Verde Syntro cuando activado */
-        
-        /* Botón exportar con estilo Syntro */
-        .btn-export { background: #168aad; color: white; border: none;} /* Otro azul de tu paleta */
+        input, select, button { padding: 12px; border-radius: 10px; border: none; box-shadow: 3px 3px 6px #b8b9be, -3px -3px 6px #ffffff; background: var(--bg); font-weight: bold; font-size: 14px; }
+        button { cursor: pointer; text-transform: uppercase; background: #168aad; color: white; }
+        .btn-sat { background: #34495e; color: white; }
+        .btn-sat.on { background: var(--accent); color: #1a252f;} 
         
         .stats-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin-top: 15px; }
         .stat-card { background: var(--bg); padding: 12px; border-radius: 12px; box-shadow: var(--neu-out); text-align: center; border-top: 3px solid var(--accent); }
@@ -73,7 +46,6 @@
             .brand-text h1 { font-size: 20px; }
             .logo-img { height: 50px; }
             #map { height: 50vh; }
-            .header { padding: 15px; }
         }
     </style>
 </head>
@@ -82,32 +54,32 @@
 <div class="container">
     <div class="header">
         <div class="logo-box">
-            <img src="https://juansuarez2011-png.github.io/logo.png" alt="Syntro Logo" class="logo-img">
+            <img src="logo.png" alt="Syntro Logo" class="logo-img">
             <div class="brand-text">
                 <h1>SYNTRO CORE</h1>
-                <p>Auditoría Geoespacial e Indicadores de Producción</p>
+                <p>Auditoría Geoespacial Dual</p>
             </div>
         </div>
-        <button id="toggleSat" class="btn-sat" onclick="toggleMap()">Satelital: OFF</button>
+        <button id="toggleSat" class="btn-sat" onclick="toggleMap()">Satélite: OFF</button>
     </div>
 
     <div class="controls">
-        <div class="field">
+        <div style="display:flex; flex-direction:column;">
             <label>Hemisferio</label>
             <select id="hemi">
                 <option value="+proj=utm">Norte (N)</option>
                 <option value="+south +proj=utm">Sur (S)</option>
             </select>
         </div>
-        <div class="field">
+        <div style="display:flex; flex-direction:column;">
             <label>Zona UTM</label>
             <input type="number" id="utmZone" value="19">
         </div>
-        <div class="field" style="flex-grow: 1;">
-            <label>Cargar CSV de Campo</label>
-            <input type="file" id="csvFile" accept=".csv" style="width: 100%;">
+        <div style="display:flex; flex-direction:column;">
+            <label>Cargar CSV</label>
+            <input type="file" id="csvFile" accept=".csv">
         </div>
-        <button class="btn-export" onclick="descargarJSON()">Exportar GIS</button>
+        <button onclick="descargarJSON()">Exportar GIS</button>
     </div>
 
     <div id="map"></div>
@@ -124,7 +96,7 @@
 <script src="turf.min.js"></script>
 
 <script>
-    let map = L.map('map', { attributionControl: false, zoomSnap: 0.5 }).setView([10.5, -71.5], 8);
+    let map = L.map('map', { attributionControl: false }).setView([10.5, -71.5], 8);
     let polygonLayer, geoData, isSat = false;
     const satTile = L.tileLayer('https://mt1.google.com/vt/lyrs=y&x={x}&y={y}&z={z}');
 
@@ -132,11 +104,11 @@
         const btn = document.getElementById('toggleSat');
         if(!isSat) {
             satTile.addTo(map);
-            btn.innerText = "Satelital: ON";
+            btn.innerText = "Satélite: ON";
             btn.classList.add('on');
         } else {
             map.removeLayer(satTile);
-            btn.innerText = "Satelital: OFF";
+            btn.innerText = "Satélite: OFF";
             btn.classList.remove('on');
         }
         isSat = !isSat;
@@ -157,20 +129,14 @@
                         const y = parseFloat(row.norte || row.Norte || row.Y || row.y);
                         return proj4(utmStr, wgs84, [x, y]);
                     });
-
                     if(pts[0][0] !== pts[pts.length-1][0]) pts.push(pts[0]);
                     geoData = turf.polygon([pts]);
-
                     document.getElementById('valArea').innerText = (turf.area(geoData)/10000).toFixed(2);
                     document.getElementById('valPeri').innerText = (turf.length(geoData)).toFixed(2);
-
                     if (polygonLayer) map.removeLayer(polygonLayer);
-                    polygonLayer = L.geoJSON(geoData, {
-                        style: { color: '#ffffff', weight: 4, fillOpacity: 0.4, fillColor: '#e67e22' } // Color naranja de contraste para la finca
-                    }).addTo(map);
-                    
+                    polygonLayer = L.geoJSON(geoData, { style: { color: '#ffffff', weight: 4, fillOpacity: 0.4, fillColor: '#e67e22' } }).addTo(map);
                     map.fitBounds(polygonLayer.getBounds(), {padding: [30, 30]});
-                } catch(err) { alert("Error al procesar el archivo CSV."); }
+                } catch(err) { alert("Error en el archivo."); }
             }
         });
     };
@@ -180,7 +146,7 @@
         const blob = new Blob([JSON.stringify(geoData)], {type: "application/json"});
         const a = document.createElement('a');
         a.href = URL.createObjectURL(blob);
-        a.download = "Syntro_Core_Audit.json";
+        a.download = "Syntro_Audit.json";
         a.click();
     }
 </script>
